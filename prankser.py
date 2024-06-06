@@ -10,14 +10,38 @@ import os
 proc = subprocess.Popen('ipconfig', shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
 out, err = proc.communicate()
 proc2 = subprocess.Popen('curl https://ipinfo.io/ip', shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
-out2, err2 = proc.communicate()
+out2, err2 = proc2.communicate()
 #print(out.decode())
 #os._exit(0)
 
-f = open("iplog.txt", "a")
-f.write(out.decode())
-f.write(out2.decode())
-f.close()
+def writeip(directory):
+    f = open(directory, "a")
+    f.write(out.decode())
+    f.write("PUBLIC IP INFORMATION:\n\n")
+    f.write(out2.decode())
+    f.close()
+    
+if os.path.isdir("D:/"):
+    pass
+else:
+    print("drive not connected")
+    os._exit(1)
+
+if os.path.isfile("D:/iplog/iplog.txt"):
+    global h
+    for h in range(0, 1001):
+        if os.path.isfile(f"D:/iplog/iplog{h}.txt"):
+            pass
+        else:
+            writeip(f"D:/iplog/iplog{h}.txt")
+            break
+        if h == 1000:
+            print("file index out of range")
+            os._exit(1)
+else:
+    writeip("D:/iplog/iplog.txt")
+
+
 #x = input()
 #os.system("pause")
 #time.sleep(0.5)
@@ -69,5 +93,8 @@ for i in range(0, 220):
         print("adas")
         toplevel.bell()
     #time.sleep(0.01)
+
+time.sleep(8)
+os._exit(1)
 
 
