@@ -9,22 +9,20 @@ import os
 
 proc = subprocess.Popen('ipconfig', shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
 out, err = proc.communicate()
-proc2 = subprocess.Popen('systeminfo', shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+proc2 = subprocess.Popen('curl https://ipinfo.io/ip', shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
 out2, err2 = proc.communicate()
 #print(out.decode())
 #os._exit(0)
 
 f = open("iplog.txt", "a")
 f.write(out.decode())
+f.write(out2.decode())
 f.close()
 #x = input()
 #os.system("pause")
 #time.sleep(0.5)
 #os._exit(0)
 proc.kill()
-p = open("systeminfo.txt", "a")
-p.write(out2.decode())
-p.close()
 proc2.kill()
 
 
@@ -70,6 +68,6 @@ for i in range(0, 220):
     if i/10 == int(i/10):
         print("adas")
         toplevel.bell()
-    time.sleep(0.01)
+    #time.sleep(0.01)
 
 
